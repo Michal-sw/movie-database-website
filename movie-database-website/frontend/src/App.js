@@ -1,8 +1,7 @@
 import {React, useState, useEffect} from 'react'
 
-import UsePagination from './Components/Pagination';
-import SortListButtons from './Components/SortList';
-import FilterParameters from './Components/FilterList';
+import MovieListMain from './Routes/MovieListMain/MovieListMain';
+
 import AddOrEditMovie from './Components/EditBackend'
 import Stars from './Components/StarRating';
 import Delete from './Components/DeleteMovie';
@@ -13,63 +12,23 @@ import {
   Route,
   BrowserRouter,
   Switch,
-  // Redirect,
-  Link,
-  // useHistory,
   useParams,
   useHistory
 } from 'react-router-dom';
 
 const axios = require('axios')
 
-function App() {
-
-  return (
-    <main className="App">
-      <BrowserRouter>
-        <Switch>
-            <Route path='/' component={MovieListMain} exact/>
-            <Route path='/movie/:id' component={MovieDetailedView} exact/>
-            <Route path='/addMovie' component={AddMovieForm} exact/>
-        </Switch>
-      </BrowserRouter>
-    </main>
-  );
-}
-
-function MovieListMain() {
-
-  const [movieList, setMovieList] = useState([]);
-  const [originMovieList, setOriginMovieList] = useState([]);
-
-  useEffect(() => {
-    axios.get("http://localhost:3000/movies")
-    .then((result) => {
-      setMovieList(result.data);
-      setOriginMovieList(result.data)
-    })
-    .catch((err) => console.log(err));
-  }, [])
-
-
-  return (
-    <div className="movie-list-container">
-      <div className="sort-and-filter-container">
-        <FilterParameters data={movieList} setData={setMovieList} originalData={originMovieList}/>
-        <SortListButtons data={movieList} setData={setMovieList}/>
-      </div>
-      <div className="paginated-movies-container">
-        <UsePagination data={movieList} itemsPerPage={6} setData={setMovieList}/>
-      </div>
-      <div className="add-movie-container">
-        <Link to="/addMovie">
-          <label>ADD MOVIE</label>
-          <button> + </button>
-        </Link>
-      </div>
-    </div>
-  )
-}
+const App = () => (
+  <main className="App">
+    <BrowserRouter>
+      <Switch>
+          <Route path='/' component={MovieListMain} exact/>
+          <Route path='/movie/:id' component={MovieDetailedView} exact/>
+          <Route path='/addMovie' component={AddMovieForm} exact/>
+      </Switch>
+    </BrowserRouter>
+  </main>
+)
 
 function MovieDetailedView() {
 

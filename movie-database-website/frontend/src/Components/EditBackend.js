@@ -1,23 +1,12 @@
 /* eslint-disable react/prop-types */
 
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import {Formik, Form, Field} from "formik";
 import { useHistory } from "react-router-dom";
 
 const axios = require('axios')
 
-function AddOrEditMovie(props) {
-
-  const [movieList, setMovieList] = useState([]);
-
-  useEffect(() => {
-    axios.get("http://localhost:3000/movies")
-    .then((result) => {
-      setMovieList(result.data);
-      console.log(movieList);
-    })
-    .catch((err) => console.log(err));
-  }, [])
+function AddOrEditMovie({movieDetail}) {
 
   // Movie Entity Structure 
   // {
@@ -42,15 +31,15 @@ const [errorMessage, setErrorMessage] = useState(null)
           enableReinitialize={true}
           initialValues={
             {
-              id: props.movieDetail.id || null,
-              title: props.movieDetail.title || "",
-              director: props.movieDetail.director || '',
-              genre: props.movieDetail.genre || '',
-              year: props.movieDetail.year || '',
-              description: props.movieDetail.description || '',
-              image_url: props.movieDetail.image_url || "https://audio-book.net.pl/image/200/285?url=https%3A%2F%2Faudio-book.net.pl%2Fuploads%2Fposts%2Fthumbs%2FzU0KpB1z.jpg",
-              rating_count: props.movieDetail.rating_count || 0,
-              rating: props.movieDetail.rating || 0
+              id: movieDetail.id || null,
+              title: movieDetail.title || "",
+              director: movieDetail.director || '',
+              genre: movieDetail.genre || '',
+              year: movieDetail.year || '',
+              description: movieDetail.description || '',
+              image_url: movieDetail.image_url || "https://audio-book.net.pl/image/200/285?url=https%3A%2F%2Faudio-book.net.pl%2Fuploads%2Fposts%2Fthumbs%2FzU0KpB1z.jpg",
+              rating_count: movieDetail.rating_count || 0,
+              rating: movieDetail.rating || 0
             }}
           validate={(values) => {
 
@@ -103,11 +92,7 @@ const [errorMessage, setErrorMessage] = useState(null)
               .catch((er) => console.log(er.response.data))
             } 
           }}>
-{/* {errorMessage.title ? <p>{errorMessage.title}</p> : null}
-{errorMessage.director ? <p>{errorMessage.title}</p> : null}
-{errorMessage.genre ? <p>{errorMessage.title}</p> : null}
-{errorMessage.year ? <p>{errorMessage.title}</p> : null}
-{errorMessage.description ? <p>{errorMessage.title}</p> : null} */}
+
           <Form>
             <div className="form-fields">
               <div  className="title-field">
