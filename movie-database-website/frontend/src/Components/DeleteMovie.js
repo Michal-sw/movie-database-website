@@ -1,20 +1,14 @@
 /* eslint-disable react/prop-types */
 
-import axios from "axios";
 import React from "react";
+import InteractWithBackend from "./BackEndFetches";
 
 function Delete(props) {
-
-  function deleteMovie() {
-    axios
-    .delete(`http://localhost:3000/movie/${props.movieId}`)
-    .then(() => console.log("Movie Deleted From Database"))
-    .catch(() => console.log("Error with movie deleting"))
-  }
+  const { deleteMovie } = InteractWithBackend();
 
   return (
     <div>
-      <button onClick={deleteMovie}>
+      <button onClick={() => deleteMovie(props.movieId)}>
         Delete Movie
       </button>
     </div>

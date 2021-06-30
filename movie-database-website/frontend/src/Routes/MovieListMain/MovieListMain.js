@@ -3,14 +3,14 @@ import {React} from 'react'
 import UsePagination from '../../Components/Pagination';
 import SortListButtons from '../../Components/SortList';
 import FilterParameters from '../../Components/FilterList';
-import getMoviesFromBackend from '../../Components/BackEndFetches';
+import InteractWithBackend from '../../Components/BackEndFetches';
 
 import { Link } from 'react-router-dom';
 
 
 function MovieListMain() {
-  
-  const {movieList, setMovieList, originMovieList} = getMoviesFromBackend();
+
+  const {movieList, setMovieList, originMovieList} = InteractWithBackend();
 
   return (
     <div className="movie-list-container">
