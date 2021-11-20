@@ -69,9 +69,7 @@ function UsePagination({data, itemsPerPage, setData}) {
       <div key={movie.id}
         className="movie-main">
 
-        <Link to={`/movie/${movie.id}`}
-          // onClick={() => history.push(`/movie/${movie.id}`)}
-          >
+        <Link to={`/movie/${movie.id}`}>
             <div className="movie-container">
 
               <div className="movie-image">
