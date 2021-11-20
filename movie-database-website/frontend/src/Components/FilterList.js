@@ -4,8 +4,6 @@ import { React, useRef, useState, useEffect } from "react";
 
 function FilterParameters({setData, originalData}) {
 
-  // = = = = = = = = = = = = = = = = = = = = =  
-  // Filter Gwiazdkowy
   const [starFilter, setStarFilter] = useState("5")
 
   function handleStarFilterChange(option) {
@@ -17,10 +15,7 @@ function FilterParameters({setData, originalData}) {
 
     setData(result)
   }
-  // = = = = = = = = = = = = = = = = = = = = =  
-
-  // Filter Gatunkowy 
-
+  
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
   const showMenu = () => setIsActive(!isActive);
@@ -47,8 +42,8 @@ function FilterParameters({setData, originalData}) {
       </div>
     )
   }
-  // DropDown dla filtra Gatunku
-  useEffect(() => {
+
+useEffect(() => {
     const pageClickEvent = (e) => {
       if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target)) {
         setIsActive(!isActive);
@@ -68,9 +63,6 @@ function FilterParameters({setData, originalData}) {
     const result = originalData.filter((movie) => movie.genre === genre);
     setData(result);
   }
-  // = = = = = = = = = = = = = = = = = = = = =  
-
-  // Filter Nazwa Filmu
 
   const [titleFilter, setTitleFilter] = useState("");
 
@@ -85,10 +77,7 @@ function FilterParameters({setData, originalData}) {
     });
     setData(result)
   }
-  // = = = = = = = = = = = = = = = = = = = = =  
 
-
-  // Gotowy Komponent
   return (
     <div className="filter-container">
       <div className="filter-by-genre">
