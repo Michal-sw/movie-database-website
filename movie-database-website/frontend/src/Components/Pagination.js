@@ -3,8 +3,6 @@
 import { React, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-// import { PropTypes } from 'prop-types'
-
 function UsePagination({data, itemsPerPage, setData}) {
   
   const [currentData, setCurrentData] = useState(data);
@@ -12,13 +10,11 @@ function UsePagination({data, itemsPerPage, setData}) {
   const maxPage = Math.ceil(data.length / itemsPerPage);
   const [checkedBoxes, setCheckedBoxes] = useState([]);
 
-  // CheckedBoxes sluzy do przechowywania stanu wszystkich checkboxow 
   useEffect(() => {
     setCheckedBoxes(new Array(data.length).fill(false))
 
   }, [data])
 
-  // Przy zmianie checka zmien stan na true lub false
   const handleBoxCheck = (position) => {
     const updatedCheckedState = checkedBoxes.map((item, index) =>
       index === position ? !item : item
@@ -60,7 +56,6 @@ function UsePagination({data, itemsPerPage, setData}) {
   return (
     <div className="movies-list">
       <div className="pagination-buttons">
-        {/* Paginacja - przyciski odpowiadajace za konkretne dzialania */}
         <button onClick={() => jump(1)}> {'<<<'} First</button>
         <button onClick={prev}>PreV</button>
         <p>{currentPage}</p>
@@ -105,13 +100,11 @@ function UsePagination({data, itemsPerPage, setData}) {
             </div>
         </Link>
 
-        {/* CheckBox - State przechowywany jest w liscie (true/false) */}
         <div className="movie-hide">
           <label>Hide</label>
           <input
               type="checkbox" 
               className="hide-movie"
-              // Tu byl problem z indexami kiedy ususwalo sie pozycje z listy. Musialem zmienic z movie.id na findIndex
               checked={checkedBoxes[data.findIndex((iterMovie) => iterMovie.id === movie.id)] || false}
               onChange={() => handleBoxCheck(data.findIndex((iterMovie) => iterMovie.id === movie.id))}
               />
